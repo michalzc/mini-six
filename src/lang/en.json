@@ -1,1 +1,11 @@
-{}
+{
+  "MiniSix": {
+    "PotencyLevel": {
+      "notAThreat": "Not a threat usually",
+      "minor": "Minor threat only in a group",
+      "credible": "Credible threat",
+      "watchOut": "Watch out, Heroes!",
+      "bold": "Bold or foolish to even try"
+    }
+  }
+}

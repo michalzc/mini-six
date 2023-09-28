@@ -1,28 +1,42 @@
-// SPDX-FileCopyrightText: 2022 Johannes Loher
-//
-// SPDX-License-Identifier: MIT
-
-/**
- * This is your JavaScript entry file for Foundry VTT.
- * Register custom settings, sheets, and constants using the Foundry API.
- * Change this heading to be more descriptive to your system, or remove it.
- * Author: [your name]
- * Content License: [copyright and-or license] If using an existing system
- * 					you may want to put a (link to a) license or copyright
- * 					notice here (e.g. the OGL).
- * Software License: [your license] Put your desired license here, which
- * 					 determines how others may use and modify your system.
- */
-
-// Import JavaScript modules
 import { registerSettings } from './settings.js';
 import { preloadTemplates } from './preloadTemplates.js';
+import { log } from './utils.js';
+import CharacterDataModel from './data-model/character-data-model.js';
+import {
+  ArmourDataModel,
+  GearDataModel,
+  PerkDataModel,
+  ShieldDataModel,
+  SkillDataModel,
+  SpellDataModel,
+  WeaponDataModel,
+} from './data-model/items-data-models.js';
+import { NpcDataModel } from './data-model/npc-data-model.js';
+
+function registerDataModels() {
+  CONFIG.Actor.dataModels = {
+    ...CONFIG.Actor.dataModels,
+    character: CharacterDataModel,
+    npc: NpcDataModel,
+  };
+  CONFIG.Item.dataModels = {
+    ...CONFIG.Item.dataModels,
+    skill: SkillDataModel,
+    perk: PerkDataModel,
+    spell: SpellDataModel,
+    weapon: WeaponDataModel,
+    armour: ArmourDataModel,
+    shield: ShieldDataModel,
+    gear: GearDataModel,
+  };
+}
 
 // Initialize system
 Hooks.once('init', async () => {
-  console.log('mini-six | Initializing mini-six');
+  log('Initializing mini-six');
 
   // Assign custom classes and constants here
+  registerDataModels();
 
   // Register custom system settings
   registerSettings();
@@ -31,6 +45,7 @@ Hooks.once('init', async () => {
   await preloadTemplates();
 
   // Register custom sheets (if any)
+  log('Initialized');
 });
 
 // Setup system
