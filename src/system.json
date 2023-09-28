@@ -1,0 +1,45 @@
+{
+  "id": "mini-six",
+  "title": "Mini Six System",
+  "description": "Unofficial Mini Six System",
+  "authors": [
+    {
+      "name": "Michał Z.",
+      "email": "michal.t.zajac@gmail.com"
+    }
+  ],
+  "url": "This is auto replaced",
+  "license": "WTFPL",
+  "readme": "<optionally the URL to your readme>",
+  "bugs": "<optionally the URL to your issue list>",
+  "changelog": "<optionally the URL to your changelog>",
+  "version": "This is auto replaced",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11.309"
+  },
+  "scripts": [],
+  "esmodules": ["module/mini-six.js"],
+  "styles": ["styles/mini-six.css"],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "requires": [],
+    "conflicts": []
+  },
+  "socket": false,
+  "manifest": "This is auto replaced",
+  "download": "This is auto replaced",
+  "background": "systems/mini-six/assets/mini-six-bg.jpg",
+  "initiative": "<inititative roll formula for your system>",
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "<optionally the attribute to use as primary resource in tokens by default>",
+  "secondaryTokenAttribute": "<optionally the attribute to use as secondary resource in tokens by default>"
+}
