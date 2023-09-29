@@ -11,6 +11,8 @@ export default class CharacterDataModel extends foundry.abstract.DataModel {
         age: new fields.NumberField({ integer: true, positive: true }),
         biography: new fields.HTMLField(),
         complications: new fields.SetField(new fields.StringField({ trim: true })),
+        weight: new fields.NumberField({ integer: true, positive: true }),
+        height: new fields.NumberField({ integer: true, positive: true }),
       }),
       scale: diceValue(),
       attributes: attributesSchema(),

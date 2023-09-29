@@ -1,11 +1,60 @@
 {
+  "TYPES": {
+    "Actor": {
+      "character": "Player Character",
+      "npc": "Non-Player Character",
+      "vehicle": "Vehicle"
+    },
+    "Item": {
+      "skill": "Skill",
+      "perk": "Perk",
+      "spell": "Spell",
+      "weapon": "Weapon",
+      "armour": "Armour",
+      "gear": "Gear"
+    }
+  },
   "MiniSix": {
+    "Attributes": {
+      "none": "None",
+      "might": "Might",
+      "agility": "Agility",
+      "wit": "Wit",
+      "charm": "Charm"
+    },
     "PotencyLevel": {
       "notAThreat": "Not a threat usually",
       "minor": "Minor threat only in a group",
       "credible": "Credible threat",
       "watchOut": "Watch out, Heroes!",
       "bold": "Bold or foolish to even try"
+    },
+    "Sheet": {
+      "character": "Mini Six Character Sheet",
+      "npc": "Mini Six NPC Sheet",
+      "vehicle": "Mini Six Vehicle Sheet",
+      "item": "Mini Six Item Sheet"
+    },
+    "Tabs": {
+      "attributes": "Attributes & Skills",
+      "combat": "Combat",
+      "perksAndSpells": "Perks & Magic",
+      "gear": "Gear",
+      "bio": "Biography",
+      "details": "Details",
+      "description": "Description"
+    },
+    "Labels": {
+      "name": "Name",
+      "quote": "Quote",
+      "appearance": "Appearance",
+      "personality": "Personality",
+      "age": "Age",
+      "sex": "Sex",
+      "height": "Height",
+      "weight": "Weight",
+      "attribute": "Attribute",
+      "none": "None"
     }
   }
 }

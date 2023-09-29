@@ -2,3 +2,52 @@
 /*             Less             */
 /* This is your Less entry file */
 /* ---------------------------- */
+
+.mini-six.sheet {
+  .sheet-header {
+    padding-bottom: 0.5em;
+
+    .header-row {
+      display: flex;
+      flex-direction: row;
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+      gap: 0.5em;
+    }
+
+    .header-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr 2fr);
+      align-items: center;
+      padding-top: 0.2em;
+      gap: 0.2em;
+
+      label {
+        text-align: right;
+      }
+    }
+  }
+
+  .sheet-tabs {
+  }
+
+  .sheet-body {
+    .tab {
+      .editor {
+        min-height: 236px;
+      }
+
+      .tox {
+        min-height: 236px;
+      }
+    }
+  }
+}
+
+.mini-six.sheet.item {
+  .skill-details {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}

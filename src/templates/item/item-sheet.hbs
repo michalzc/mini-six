@@ -1,0 +1,25 @@
+<form class="{{cssClass}} sheet-form" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img src="{{item.img}}" class="profile-img" data-edit="img" title="{{item.name}}" height="256" width="256"
+         alt="{{item.name}}" />
+    <h1><input type="text" name="name" value="{{item.name}}" placeholder="{{localize "MiniSix.Labels.name"}}"></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{ localize "MiniSix.Tabs.details" }}</a>
+    <a class="item" data-tab="description">{{ localize "MiniSix.Tabs.description" }}</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab details" data-group="primary" data-tab="details">
+      {{> (lookup . 'sheetDetails') }}
+    </div>
+
+    <div class="tab description" data-group="primary" data-tab="description">
+      <div>
+        {{editor itemDescription target="system.description" button=true engine="tinymce" editable=true }}
+      </div>
+    </div>
+  </section>
+
+</form>

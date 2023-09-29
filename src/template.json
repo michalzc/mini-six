@@ -7,14 +7,13 @@
     "vehicle": {}
   },
   "Item": {
-    "types": ["skill", "perk", "spell", "weapon", "armour", "shield", "gear"],
+    "types": ["skill", "perk", "spell", "weapon", "armour", "gear"],
     "htmlFields": ["description"],
     "skill": {},
     "perk": {},
     "spell": {},
     "weapon": {},
     "armour": {},
-    "shield": {},
     "gear": {}
   }
 }

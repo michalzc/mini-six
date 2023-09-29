@@ -1,1 +1,8 @@
-export const log = console.log.bind(undefined, 'Mini Six |');
+import { SYSTEM_NAME } from './consts.js';
+
+export const log = console.log.bind(undefined, `${SYSTEM_NAME} |`);
+
+export const logObject = (message, object) => {
+  log(message, object);
+  return object;
+};

@@ -1,5 +1,5 @@
 import { attributesSchema, diceValue, staticsSchema } from './common-models.js';
-import CONSTS from '../consts.js';
+import { SYSTEM } from '../consts.js';
 
 const fields = foundry.data.fields;
 
@@ -8,7 +8,7 @@ export class NpcDataModel extends foundry.abstract.DataModel {
     return {
       description: new fields.HTMLField(),
       scale: diceValue(),
-      potency: new fields.StringField({ choices: CONSTS.POTENCY_LEVEL }),
+      potency: new fields.StringField({ choices: SYSTEM.POTENCY_LEVEL }),
       attributes: attributesSchema(),
       statics: staticsSchema(),
       state: new fields.SchemaField({

@@ -1,4 +1,5 @@
 import { diceValue, gearCharacteristicsSchema } from './common-models.js';
+import { SYSTEM } from '../consts.js';
 
 const fields = foundry.data.fields;
 
@@ -6,7 +7,7 @@ export class SkillDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: new fields.HTMLField(),
-      attributeRef: new fields.StringField({ trim: true }),
+      attributeRef: new fields.StringField({ trim: true, choices: SYSTEM.ATTRIBUTES, initial: 'none' }),
       genre: new fields.SetField(new fields.StringField({ trim: true })),
       value: diceValue(),
     };
@@ -50,16 +51,7 @@ export class ArmourDataModel extends foundry.abstract.DataModel {
       description: new fields.HTMLField(),
       characteristics: gearCharacteristicsSchema(),
       soak: diceValue(),
-    };
-  }
-}
-
-export class ShieldDataModel extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      description: new fields.HTMLField(),
-      characteristics: gearCharacteristicsSchema(),
-      soak: diceValue(),
+      isShield: new fields.BooleanField({ initial: false }),
     };
   }
 }

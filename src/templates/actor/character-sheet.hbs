@@ -1,0 +1,60 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="flexcol">
+      <div class="header-row">
+        <img src="{{actor.img}}" class="profile-img" data-edit="img" title="{{actor.name}}" height="256" width="256"
+             alt="{{actor.name}}" />
+        <h1><input type="text" name="name" value="{{actor.name}}" placeholder="{{localize "MiniSix.Labels.name"}}"></h1>
+      </div>
+
+      <div class="header-row">
+
+        <label for="quote" class="flex0">{{ localize "MiniSix.Labels.quote" }}</label>
+        <input type="text" id="quote" name="system.characteristics.quote" value="{{system.characteristics.quote}}">
+      </div>
+
+      <div class="header-row">
+        <label for="appearance" class="flex0"> {{ localize "MiniSix.Labels.appearance" }}</label>
+        <input type="text" id="appearance" name="system.characteristics.appearance"
+               value="{{system.characteristics.appearance}}">
+
+      </div>
+
+      <div class="header-row">
+        <label for="personality" class="flex0">{{ localize "MiniSix.Labels.personality" }}</label>
+        <input type="text" id="personality" name="system.characteristics.personality"
+               value="{{system.characteristics.personality}}">
+      </div>
+
+      <div class="header-grid">
+          <label for="age" class="flex0"> {{ localize "MiniSix.Labels.age" }} </label>
+          <input type="number" data-dtype="Number" id="age" name="system.characteristics.age"
+                 value="{{system.characteristics.age}}">
+          <label for="sex" class="flex0">{{ localize "MiniSix.Labels.sex" }}</label>
+          <input type="text" id="sex" name="system.characteristics.sex" value="{{system.characteristics.sex}}">
+          <label for="height" class="flex0">{{ localize "MiniSix.Labels.height" }}</label>
+          <input type="number" data-dtype="Number" name="system.characteristics.height"
+                 value="{{system.characteristics.height}}">
+          <label for="weight" class="flex0">{{ localize "MiniSix.Labels.weight" }}</label>
+          <input type="number" data-dtype="Number" name="system.characteristics.weight"
+                 value="{{system.characteristics.weight}}">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes">{{ localize "MiniSix.Tabs.attributes" }}</a>
+    <a class="item" data-tab="combat">{{ localize "MiniSix.Tabs.combat" }}</a>
+    <a class="item" data-tab="perksAndSpells">{{ localize "MiniSix.Tabs.perksAndSpells" }}</a>
+    <a class="item" data-tab="gear">{{ localize "MiniSix.Tabs.gear" }}</a>
+    <a class="item" data-tab="bio">{{ localize "MiniSix.Tabs.bio" }}</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      {{> systems/mini-six/templates/actor/parts/attributes.hbs }}
+    </div>
+  </section>
+
+</form>
