@@ -1,4 +1,4 @@
-import { log, logObject } from '../utils.js';
+import { log, logObject, normalizeDice } from '../utils.js';
 import { SYSTEM_ID } from '../consts.js';
 
 export default class MinSixActor extends Actor {
@@ -64,9 +64,7 @@ export default class MinSixActor extends Actor {
         const skills = (skillsByAttr[name] ?? []).map((skill) => {
           const skillDice = skill.system.value?.dice ?? 0;
           const skillPips = skill.system.value?.pips ?? 0;
-          const combinedPips = pips + skillPips;
-          const rollDice = dice + skillDice + Math.floor(combinedPips / 3);
-          const rollPips = combinedPips % 3;
+          const [rollDice, rollPips] = normalizeDice([dice + skillDice, pips + skillPips]);
           return {
             id: skill._id,
             name: skill.name,

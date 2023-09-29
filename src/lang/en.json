@@ -65,7 +65,7 @@
       "deleteConfirmationTitle": "Are you sure?"
     },
     "Rolls": {
-      "skillRoll": "Skill Roll: <strong>{skill}({attribute})</strong>",
+      "skillRoll": "Skill Roll: <strong>{skill} ({attribute})</strong>",
       "attributeRoll": "Attribute Roll"
     }
   }

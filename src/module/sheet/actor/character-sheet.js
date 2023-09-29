@@ -19,6 +19,9 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
 
   activateListeners(html) {
     super.activateListeners(html);
+
+    if (!this.isEditable) return;
+
     this.skillContextMenu(html);
 
     html.find('.skill-roll').click(this.onSkillRoll.bind(this));
