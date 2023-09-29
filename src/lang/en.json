@@ -16,7 +16,7 @@
   },
   "MiniSix": {
     "Attributes": {
-      "none": "None",
+      "none": "No Attribute",
       "might": "Might",
       "agility": "Agility",
       "wit": "Wit",
@@ -54,7 +54,19 @@
       "height": "Height",
       "weight": "Weight",
       "attribute": "Attribute",
-      "none": "None"
+      "none": "None",
+      "value": "Value",
+      "genre": "Genre",
+      "delete": "Delete",
+      "edit": "Edit",
+      "deleteConfirmation": "Would you like to delete item?",
+      "yes": "Yes",
+      "no": "No",
+      "deleteConfirmationTitle": "Are you sure?"
+    },
+    "Rolls": {
+      "skillRoll": "Skill Roll: <strong>{skill}({attribute})</strong>",
+      "attributeRoll": "Attribute Roll"
     }
   }
 }

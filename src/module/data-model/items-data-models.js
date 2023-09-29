@@ -8,7 +8,7 @@ export class SkillDataModel extends foundry.abstract.DataModel {
     return {
       description: new fields.HTMLField(),
       attributeRef: new fields.StringField({ trim: true, choices: SYSTEM.ATTRIBUTES, initial: 'none' }),
-      genre: new fields.SetField(new fields.StringField({ trim: true })),
+      genre: new fields.StringField({ trim: true }),
       value: diceValue(),
     };
   }

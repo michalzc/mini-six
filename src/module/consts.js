@@ -4,9 +4,6 @@ export const SYSTEM_NAME = 'Mini Six 🎲';
 const POTENCY_LEVEL = ['notAThreat', 'minor', 'credible', 'watchOut', 'bold'];
 
 const ATTRIBUTES = {
-  none: {
-    label: 'MiniSix.Attributes.none',
-  },
   might: {
     label: 'MiniSix.Attributes.might',
   },
@@ -18,6 +15,9 @@ const ATTRIBUTES = {
   },
   charm: {
     label: 'MiniSix.Attributes.charm',
+  },
+  none: {
+    label: 'MiniSix.Attributes.none',
   },
 };
 

@@ -1,6 +1,19 @@
 <div class="skill-details">
   <label for="attribute">{{ localize 'MiniSix.Labels.attribute' }}</label>
-  <select id="attribute" name="system.attributeRef">
+  <select id="attribute" name="system.attributeRef" class="span3">
     {{selectOptions attributes selected=system.attributeRef localize=true}}
   </select>
+
+  <label>{{ localize 'MiniSix.Labels.value' }}</label>
+  <div class="flexrow value-form">
+    <input id="dice" type="number" data-dtype="Number" name="system.value.dice" value="{{system.value.dice}}">
+    <label for="dice"><i class="fa fa-dice-d6"></i></label>
+    <label for="pips">+</label>
+    <input id="pips" type="number" data-dtype="Number" name="system.value.pips" value="{{system.value.pips}}">
+
+
+  </div>
+  <div class="span2">&nbsp;</div>
+  <label for="genre">{{ localize 'MiniSix.Labels.genre' }}</label>
+  <input id="genre" class="span3" name="system.genre" value="{{system.genre}}" type="text">
 </div>

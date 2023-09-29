@@ -1,2 +1,41 @@
-Attributes
+<div class="attributes-with-skills">
+  {{#each attributesWithSkills as |attr|}}
+    <div class="attribute-with-skills flexcol">
+      <div class="attribute">
+        {{#if attr.isNone}}
+          <div class="attribute-row flexrow">
+            {{ attr.label }}
+          </div>
+        {{else}}
+          <div class="attribute-row flexrow">
+            <a class="attribute-roll flex3" data-attribute="{{attr.name}}">{{ attr.label }}</a>
+            <div class="flex0 attribute-form">
 
+              <input type="number" data-dtype="Number" id="{{attr.name}}-dice"
+                     name="system.attributes.{{attr.name}}.dice"
+                     value="{{attr.value.dice}}">
+              <label for="{{attr.name}}-dice"><i class="fas fa-dice-d6"></i></label>
+              <label for="{{attr.name}}-pips">+</label>
+              <input type="number" data-dtype="Number" id="{{attr.name}}-pips"
+                     name="system.attributes.{{attr.name}}.pips"
+                     value="{{attr.value.pips}}">
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      {{#each attr.skills as |skill|}}
+        <div class="skill-list-element">
+          <a class="skill-roll flex1" data-item-id="{{skill.id}}" data-attribute="{{attr.name}}"
+             data-tooltip="{{ skill.description }}">
+            {{#if skill.img }}
+              <img src="{{skill.img}}" title="{{skill.name}}" alt="{{skill.name}}">
+            {{/if}}
+            {{ skill.name }}
+          </a>
+          <span class="flex0">&nbsp;{{skill.rollValue.dice}}&nbsp;<i
+            class="fas fa-dice-d6"></i>&nbsp;+&nbsp;{{skill.rollValue.pips}}</span>
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>

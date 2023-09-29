@@ -36,7 +36,6 @@
   "socket": false,
   "manifest": "This is auto replaced",
   "download": "This is auto replaced",
-  "background": "systems/mini-six/assets/mini-six-bg.jpg",
   "initiative": "<inititative roll formula for your system>",
   "gridDistance": 1,
   "gridUnits": "m",

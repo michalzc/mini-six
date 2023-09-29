@@ -42,12 +42,101 @@
       }
     }
   }
+
+  .value-form {
+    align-items: center;
+    gap: 0.25em;
+
+    & > * {
+      flex: 0;
+    }
+
+    & > label {
+      text-align: center;
+    }
+
+    input[type='number'] {
+      text-align: center;
+      min-width: 2em;
+    }
+  }
+
+  .span2 {
+    grid-column-end: span 2;
+  }
+
+  .span3 {
+    grid-column-end: span 3;
+  }
+
+  .span4 {
+    grid-column-end: span 4;
+  }
 }
 
 .mini-six.sheet.item {
   .skill-details {
     padding: 1em;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 1em;
+  }
+}
+
+.mini-six.sheet.actor {
+  .attributes-with-skills {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr;
+
+    .attribute-with-skills {
+      gap: 0.25em;
+
+      .attribute {
+        flex-grow: 0;
+
+        .attribute-row {
+          border-bottom: 1px solid var(--color-underline-header);
+          align-items: center;
+          padding-bottom: 0.25em;
+          font-size: 1.25em;
+        }
+
+        .attribute-form {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          gap: 0.25em;
+          align-items: center;
+        }
+
+        input[type='number'] {
+          min-width: 2em;
+          text-align: center;
+        }
+      }
+
+      .skill-list-element {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        flex-grow: 0;
+
+        .skill-roll {
+          flex-grow: 1;
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          gap: 0.25em;
+
+          img {
+            width: 1.5em;
+            height: 1.5em;
+            border: 0;
+          }
+        }
+      }
+    }
   }
 }

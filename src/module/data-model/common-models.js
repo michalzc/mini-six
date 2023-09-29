@@ -3,7 +3,7 @@ const fields = foundry.data.fields;
 export function diceValue() {
   return new fields.SchemaField({
     dice: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
-    pips: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0, max: 3 }),
+    pips: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0, max: 2 }),
   });
 }
 

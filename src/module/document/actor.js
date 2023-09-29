@@ -71,6 +71,7 @@ export default class MinSixActor extends Actor {
             id: skill._id,
             name: skill.name,
             description: skill.system.description,
+            img: skill.img,
             value: {
               dice: skillDice,
               pips: skillPips,
@@ -91,6 +92,7 @@ export default class MinSixActor extends Actor {
               pips,
             },
             skills,
+            isNone: name === 'none',
           },
         ];
       }),

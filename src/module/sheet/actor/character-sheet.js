@@ -1,6 +1,7 @@
 import { MiniSixBaseActorSheet } from './base-actor-sheet.js';
-import { log } from '../../utils.js';
+import { log, logObject } from '../../utils.js';
 import { SYSTEM_ID } from '../../consts.js';
+import { skillRoll } from '../../roll.js';
 
 export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
   static get defaultOptions() {
@@ -16,11 +17,88 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
     });
   }
 
+  activateListeners(html) {
+    super.activateListeners(html);
+    this.skillContextMenu(html);
+
+    html.find('.skill-roll').click(this.onSkillRoll.bind(this));
+  }
+
+  onSkillRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const data = element.dataset;
+    const skillId = data.itemId;
+    const attributeName = data.attribute;
+
+    const attribute = this.actor.attributesWithSkills[attributeName];
+    const skill = (attribute.skills ?? []).find((skill) => skill.id === skillId);
+
+    skillRoll(skill, attribute, this.actor);
+  }
+
+  skillContextMenu(html) {
+    const elems = [
+      {
+        name: game.i18n.localize('MiniSix.Labels.edit'),
+        icon: '<i class="fas fa-edit"></i>',
+        callback: this.onItemEdit.bind(this),
+      },
+      {
+        name: game.i18n.localize('MiniSix.Labels.delete'),
+        icon: '<i class="fas fa-trash"></i>',
+        callback: this.onItemDelete.bind(this),
+      },
+    ];
+
+    new ContextMenu(html, '.skill-roll', elems);
+  }
+
+  onItemEdit(elem) {
+    log('Edit item', elem.data());
+    const id = elem.data()['itemId'];
+    if (id) {
+      const item = this.actor.items.get(id);
+      if (item) item.sheet.render(true);
+    }
+  }
+
+  onItemDelete(elem) {
+    const id = elem.data()['itemId'];
+    if (id) {
+      const confirmation = new Dialog({
+        title: game.i18n.localize('MiniSix.Labels.deleteConfirmationTitle'),
+        content: game.i18n.localize('MiniSix.Labels.deleteConfirmation'),
+        buttons: {
+          yes: {
+            icon: '<i class="fas fa-check"></i>',
+            label: game.i18n.localize('MiniSix.Labels.yes'),
+            callback: this.deleteItem.bind(this, id),
+          },
+          no: {
+            icon: '<i class="fas fa-ban"></i>',
+            label: game.i18n.localize('MiniSix.Labels.no'),
+          },
+        },
+        default: 'no',
+      });
+      confirmation.render(true);
+    }
+  }
+
+  deleteItem(itemId) {
+    const item = this.actor.items.get(itemId);
+    if (item) item.delete();
+  }
+
   getData(options = {}) {
     const context = super.getData(options);
     const system = this.actor.system;
     log('Character Data', context);
+    const attributesWithSkills = Object.keys(CONFIG.SYSTEM.ATTRIBUTES).map(
+      (attr) => this.actor.attributesWithSkills[attr],
+    );
 
-    return foundry.utils.mergeObject(context, { system });
+    return logObject('Sheet context', foundry.utils.mergeObject(context, { system, attributesWithSkills }));
   }
 }
