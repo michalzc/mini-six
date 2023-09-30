@@ -62,11 +62,27 @@
       "deleteConfirmation": "Would you like to delete item?",
       "yes": "Yes",
       "no": "No",
-      "deleteConfirmationTitle": "Are you sure?"
+      "deleteConfirmationTitle": "Are you sure?",
+      "rollDialogTitle": "Test Roll"
     },
     "Rolls": {
       "skillRoll": "Skill Roll: <strong>{skill} ({attribute})</strong>",
-      "attributeRoll": "Attribute Roll"
+      "attributeRoll": "Attribute Roll: <strong>{attribute}</strong>",
+      "rollModifiers": "Roll Modifiers",
+      "success": "Success",
+      "failure": "Failure",
+      "complication": "Complication",
+      "raise": "Rise",
+      "with": " with "
+    },
+    "Difficulty": {
+      "plainRoll": "Plain Roll",
+      "veryEasy": "Very Easy",
+      "easy": "Easy",
+      "moderate": "Moderate",
+      "difficult": "Difficult",
+      "veryDifficult": "Very Difficult",
+      "heroic": "Heroic"
     }
   }
 }

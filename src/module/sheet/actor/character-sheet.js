@@ -1,7 +1,7 @@
 import { MiniSixBaseActorSheet } from './base-actor-sheet.js';
 import { log, logObject } from '../../utils.js';
 import { SYSTEM_ID } from '../../consts.js';
-import { skillRoll } from '../../roll.js';
+import { testRoll } from '../../roll.js';
 
 export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
   static get defaultOptions() {
@@ -24,20 +24,20 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
 
     this.skillContextMenu(html);
 
-    html.find('.skill-roll').click(this.onSkillRoll.bind(this));
+    html.find('.skill-roll').click(this.onTestRoll.bind(this));
+    html.find('.attribute-roll').click(this.onTestRoll.bind(this));
   }
 
-  onSkillRoll(event) {
+  async onTestRoll(event) {
     event.preventDefault();
+    log('Event', event);
+    const skipDialog = event.ctrlKey;
     const element = event.currentTarget;
     const data = element.dataset;
     const skillId = data.itemId;
     const attributeName = data.attribute;
 
-    const attribute = this.actor.attributesWithSkills[attributeName];
-    const skill = (attribute.skills ?? []).find((skill) => skill.id === skillId);
-
-    skillRoll(skill, attribute, this.actor);
+    await testRoll(this.actor, attributeName, skillId, skipDialog);
   }
 
   skillContextMenu(html) {
