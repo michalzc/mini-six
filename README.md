@@ -2,6 +2,10 @@
 
 Mini Six system for Foundry VTT
 
+## Status
+
+Pre-Alpha
+
 ## Licensing
 
 * Icons: [Game-Icons.net](https://game-icons.net/) ([CC BY 3.0](http://creativecommons.org/licenses/by/3.0/))

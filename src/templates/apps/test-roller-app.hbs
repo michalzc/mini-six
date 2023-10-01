@@ -37,10 +37,10 @@
 
     <div>{{ localize "MiniSix.Rolls.modifier" }}</div>
     <div class="dice-form">
-      <input type="number" data-dtype="Number" name="modifier.dice" value="{{modifier.dice}}" id="modifier-form-dice">
+      <input type="number" data-dtype="Number" name="modifier.dice" value="{{modifier.dice}}" id="modifier-form-dice" step="1">
       <label for="modifier-form-dice"><i class="fas fa-dice-d6"></i></label>
       <label for="modifier-form-pips">+</label>
-      <input type="number" data-dtype="Number" name="modifier.pips" value="{{modifier.pips}}" id="modifier-form-pips">
+      <input type="number" data-dtype="Number" name="modifier.pips" value="{{modifier.pips}}" id="modifier-form-pips" min="-2" max="2" step="1">
     </div>
     <div></div>
 

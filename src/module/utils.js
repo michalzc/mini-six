@@ -9,12 +9,37 @@ export const logObject = (message, object) => {
 
 export const identity = (id) => id;
 
-export const normalizeDice = ([dice, pips]) => {
+/* dice utils */
+
+/**
+ * @typedef {object} DiceValue
+ * @property {number} [dice]  Number of dice in roll
+ * @property {number} [pips]  Number of pips in roll
+ */
+
+/**
+ * Normalize DiceValue, converts pips to dice
+ * @param {DiceValue} diceValue
+ * @param {boolean} roundToZero round lower than zero values to zero
+ * @returns {DiceValue}
+ */
+export function normalizeDice(diceValue, roundToZero = true) {
+  const dice = diceValue.dice ?? 0;
+  const pips = diceValue.pips ?? 0;
   const extraDice = Math.floor(pips / 3);
   const remainingPips = pips % 3;
-  return [Math.max(dice + extraDice, 0), Math.max(remainingPips, 0)];
-};
+  let newDice = dice + extraDice;
+  return {
+    dice: (roundToZero && Math.max(newDice, 0)) || dice,
+    pips: (roundToZero && Math.max(remainingPips, 0)) || remainingPips,
+  };
+}
 
+/**
+ * Return string representation of DiceValue
+ * @param diceValue
+ * @returns {string}
+ */
 export function formatDice(diceValue) {
   const dice = (dv) => (dv?.dice && [`${dv.dice}&nbsp;<i class="fas fa-dice-d6"></i>`]) || [];
   const pips = (dv) => (dv?.pips && [dv.pips.toString()]) || [];
@@ -22,14 +47,18 @@ export function formatDice(diceValue) {
   return [dice(diceValue), pips(diceValue)].deepFlatten().join(' + ');
 }
 
+/**
+ * Combines and normalize number of dice
+ * @param {...DiceValue} args
+ * @returns {DiceValue}
+ */
 export function combineDice(...args) {
   return args.reduce(
     (acc, diceValue) => {
       const newDice = diceValue?.dice ?? 0;
       const newPips = diceValue?.pips ?? 0;
 
-      const [dice, pips] = normalizeDice([newDice + acc.dice, newPips + acc.pips]);
-      return { dice, pips };
+      return { dice: newDice + acc.dice, pips: newPips + acc.pips };
     },
     { dice: 0, pips: 0 },
   );

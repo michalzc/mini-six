@@ -1,5 +1,5 @@
 import { SYSTEM_ID } from '../consts.js';
-import { combineDice, log } from '../utils.js';
+import { combineDice, log, normalizeDice } from '../utils.js';
 
 export default class TestRollerApp extends Application {
   static get defaultOptions() {
@@ -140,7 +140,7 @@ export default class TestRollerApp extends Application {
     const modifierPips = parseInt(html.find('#modifier-form-pips').val()) || 0;
     const modifier = { dice: modifierDice, pips: modifierPips };
     const rollData = this.rollData;
-    const total = combineDice(rollData.attribute.value, rollData.skill?.value, modifier);
+    const total = normalizeDice(combineDice(rollData.attribute.value, rollData.skill?.value, modifier));
 
     this.rollData = {
       ...rollData,
