@@ -140,3 +140,21 @@
     }
   }
 }
+
+.mini-six.test-roller {
+  .roll-app-body {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr;
+    gap: 1em;
+    align-items: center;
+
+    .colspan2 {
+      grid-column-end: span 2;
+    }
+
+    .colspan3 {
+      grid-column-end: span 3;
+    }
+  }
+}

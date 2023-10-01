@@ -18,6 +18,7 @@ import { MiniSixNpcSheet } from './sheet/actor/npc-sheet.js';
 import { MiniSixVehicleSheet } from './sheet/actor/vehicle-sheet.js';
 import MiniSixItem from './document/item.js';
 import MiniSixItemSheet from './sheet/item/item-sheet.js';
+import { registerHandlebarsHelpers } from './handlebars-helpers.js';
 
 function registerDataModels() {
   CONFIG.Actor.dataModels = {
@@ -98,3 +99,4 @@ Hooks.once('ready', async () => {
 });
 
 // Add any additional hooks if necessary
+registerHandlebarsHelpers();

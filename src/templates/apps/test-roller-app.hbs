@@ -1,0 +1,41 @@
+<form class="{{cssClass}}" autocomplete="off" id="roll-form">
+  <header class="roll-app-header">
+    <h1>{{ localize "MiniSix.Rolls.testOf" title=title }}</h1>
+  </header>
+  <section class="roll-app-body">
+    <label for="roll-difficulty">{{ localize "MiniSix.Labels.difficultLevel" }}</label>
+    <select name="difficulty" id="roll-difficulty" class="colspan2">
+      {{selectOptions difficultyLevels selected=difficultyKey localize=true labelAttr="label" }}
+    </select>
+
+    <label for="roll-difficulty-level"></label>
+    <input type="number" data-dtype="Number" id="roll-difficulty-level" name="difficultyLevel"
+           value="{{difficultyLevel}}" min="0" step="1" class="colspan2">
+
+
+    {{#if skill}}
+      <label for="roll-attribute">{{ localize "MiniSix.Labels.attribute" }}</label>
+      <select id="roll-attribute">
+        {{selectOptions attributes selected=attributeName labelAttr="label" }}
+      </select>
+      <div>{{ formatDice attribute.value }}</div>
+
+      <div>{{ localize "MiniSix.Labels.skill" }}</div>
+      <div>{{ skill.name }}</div>
+      <div>{{ formatDice skill.value }}</div>
+
+    {{else}}
+      <div>{{ localize "MiniSix.Labels.attribute" }}</div>
+      <div>{{attribute.label}}</div>
+      <div>{{ formatDice attribute.value }}</div>
+    {{/if}}
+
+
+
+
+
+  </section>
+  <section class="roll-app-controls">
+    <button class="roll-button"><i class="fas fa-dice-d6"></i> {{ localize "MiniSix.Rolls.rollButton" }}</button>
+  </section>
+</form>

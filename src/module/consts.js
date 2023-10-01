@@ -24,6 +24,7 @@ const ATTRIBUTES = {
 const DIFFICULTY_LEVELS = {
   noDifficulty: {
     label: 'MiniSix.Difficulty.plainRoll',
+    max: 1,
   },
   veryEasy: {
     max: 5,
@@ -53,6 +54,7 @@ const DIFFICULTY_LEVELS = {
   heroic: {
     default: 40,
     label: 'MiniSix.Difficulty.heroic',
+    max: Number.MAX_SAFE_INTEGER,
   },
 };
 

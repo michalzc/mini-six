@@ -14,3 +14,23 @@ export const normalizeDice = ([dice, pips]) => {
   const remainingPips = pips % 3;
   return [dice + extraDice, remainingPips];
 };
+
+export function formatDice(diceValue) {
+  const dice = (dv) => (dv?.dice && [`${dv.dice}&nbsp;<i class="fas fa-dice-d6"></i>`]) || [];
+  const pips = (dv) => (dv?.pips && [dv.pips.toString()]) || [];
+
+  return [dice(diceValue), pips(diceValue)].deepFlatten().join(' + ');
+}
+
+export function combineDice() {
+  return arguments.reduce(
+    (acc, diceValue) => {
+      const newDice = diceValue?.dice ?? 0;
+      const newPips = diceValue?.pips ?? 0;
+
+      const [dice, pips] = normalizeDice([newDice + acc.dice, newPips + acc.pips]);
+      return { dice, pips };
+    },
+    { dice: 0, pips: 0 },
+  );
+}
