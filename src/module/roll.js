@@ -1,4 +1,4 @@
-import { log, logObject, normalizeDice } from './utils.js';
+import { combineDice, formatDice, log, logObject } from './utils.js';
 import TestRollerApp from './application/test-roller-app.js';
 
 // eslint-disable-next-line no-unused-vars
@@ -8,31 +8,20 @@ export async function testRoll(actor, attributeName, skillId = undefined, skipDi
     const skill = (attribute.skills ?? []).find((skill) => skill.id === skillId);
     await performRoll(actor, attribute, skill);
   } else {
-    //FIXME: implement
-    const options = {
+    const rollData = {
       attributeName,
       skillId,
       type: 'test-roll',
+      callBack: performRoll,
     };
 
-    const testRollerApp = new TestRollerApp(actor, options);
+    const testRollerApp = new TestRollerApp(actor, rollData);
     testRollerApp.render(true);
   }
 }
 
-async function performRoll(actor, attribute, skill = undefined, modifier = {}, target = {}) {
-  // const isSkillRoll = Boolean(skill);
-
-  const attributeDice = attribute?.value?.dice ?? 0;
-  const attributePips = attribute?.value?.pips ?? 0;
-
-  const skillDice = skill?.value?.dice ?? 0;
-  const skillPips = skill?.value?.pips ?? 0;
-
-  const modDice = modifier?.value?.dice ?? 0;
-  const modPips = modifier?.value?.pips ?? 0;
-
-  const [dice, pips] = normalizeDice([attributeDice + skillDice + modDice, attributePips + skillPips + modPips]);
+export async function performRoll(actor, attribute, skill = undefined, modifier = {}, target = {}) {
+  const { dice, pips } = combineDice(attribute.value, skill.value, modifier.value);
 
   const rollString = [
     (dice > 1 && [`${dice - 1}d6`]) || [],
@@ -72,6 +61,7 @@ function getRollOutcome(rollOutcomeData) {
 }
 
 async function sendRollMessage(rollData) {
+  log('SendRollMessage', rollData);
   const { attribute, skill, modifier, roll, actor, outcome } = rollData;
 
   const renderedRoll = await roll.render();
@@ -79,7 +69,7 @@ async function sendRollMessage(rollData) {
   const content = [
     makeRollPart(attribute, (attr) => attr.label),
     makeRollPart(skill, (skill) => skill.name),
-    makeRollPart(modifier, () => game.i18n.localize('MiniSix.Rolls.rollModifiers')),
+    makeRollPart(modifier, () => game.i18n.localize('MiniSix.Rolls.modifier')),
     (outcome && [outcome]) || [],
     [renderedRoll],
   ]
@@ -100,11 +90,6 @@ async function sendRollMessage(rollData) {
 }
 
 function makeRollPart(rollObj, makeLabel) {
-  const label = rollObj && makeLabel(rollObj);
-  const dice = rollObj?.value?.dice ?? 0;
-  const pips = rollObj?.value?.pips ?? 0;
-  if (rollObj && label && (dice > 0 || pips > 0)) {
-    const rollForm = [(dice > 0 && [`${dice}d6`]) || [], (pips > 0 && [`${pips}`]) || []].deepFlatten().join(' + ');
-    return [`${label}: ${rollForm}`];
-  } else return [];
+  const rollString = formatDice(rollObj.value);
+  return (rollString && [`${makeLabel(rollObj)}: ${rollString}`]) || [];
 }

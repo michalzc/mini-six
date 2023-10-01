@@ -1,12 +1,12 @@
 import { SYSTEM_ID } from '../consts.js';
-import { formatDice, log } from '../utils.js';
+import { combineDice, log } from '../utils.js';
 
 export default class TestRollerApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['mini-six', 'test-roller'],
       template: `systems/${SYSTEM_ID}/templates/apps/test-roller-app.hbs`,
-      width: 450,
+      width: 500,
       height: 'auto',
       submitOnChange: false,
       resizable: true,
@@ -20,6 +20,8 @@ export default class TestRollerApp extends Application {
     const attributes = actor.attributesWithSkills;
     const attribute = actor.attributesWithSkills[attributeName];
     const skill = attribute.skills.find((skill) => skill.id === skillId);
+    const modifier = { dice: 0, pips: 0 };
+    const total = combineDice(attribute.value, skill?.value, modifier.value);
 
     this.rollData = {
       ...rollData,
@@ -30,6 +32,8 @@ export default class TestRollerApp extends Application {
       skill,
       attributes,
       attribute,
+      modifier,
+      total,
     };
   }
 
@@ -44,8 +48,6 @@ export default class TestRollerApp extends Application {
 
     const rollData = this.rollData;
 
-    log('FomratDiceTest', formatDice({}));
-
     return foundry.utils.mergeObject(context, {
       ...rollData,
       title: this.headerTitle,
@@ -54,7 +56,7 @@ export default class TestRollerApp extends Application {
 
   get headerTitle() {
     const attributeTitle =
-      this.rollData.attributeName && this.rollData.attributeName != 'none' && this.rollData.attribute.label;
+      this.rollData.attributeName && this.rollData.attributeName !== 'none' && this.rollData.attribute.label;
     const skillTitle = this.rollData.skill?.name;
     return (skillTitle && attributeTitle && `${skillTitle} (${attributeTitle})`) || skillTitle || attributeTitle;
   }
@@ -66,13 +68,21 @@ export default class TestRollerApp extends Application {
     html.find('#roll-difficulty').on('change', this.onRollDifficultyChange.bind(this));
     html.find('#roll-difficulty-level').on('change', this.onRollDifficultyLevelChange.bind(this));
     html.find('#roll-attribute').on('change', this.onRollAttributeChange.bind(this));
+    html.find('#modifier-form-dice').on('change', this.onRollModifierChanged.bind(this, html));
+    html.find('#modifier-form-pips').on('change', this.onRollModifierChanged.bind(this, html));
   }
 
   async onRoll(event) {
     event.preventDefault();
+
+    const { attribute, skill, modifier, difficultyKey, difficultyLevel, difficultyLevels, callBack } = this.rollData;
+    const target = { value: difficultyLevel, label: difficultyLevels[difficultyKey].label };
+
+    await this.close();
+    await callBack(this.actor, attribute, skill, { value: modifier }, target);
   }
 
-  async onRollDifficultyChange(event) {
+  onRollDifficultyChange(event) {
     event.preventDefault();
 
     // eslint-disable-next-line no-undef
@@ -87,7 +97,7 @@ export default class TestRollerApp extends Application {
     this.render(true);
   }
 
-  async onRollDifficultyLevelChange(event) {
+  onRollDifficultyLevelChange(event) {
     event.preventDefault();
 
     // eslint-disable-next-line no-undef
@@ -106,18 +116,36 @@ export default class TestRollerApp extends Application {
     this.render(true);
   }
 
-  async onRollAttributeChange(event) {
+  onRollAttributeChange(event) {
     event.preventDefault();
 
     // eslint-disable-next-line no-undef
     const attributeName = $(event.target).val();
     const rollData = this.rollData;
     const attribute = rollData.attributes[attributeName];
+    const total = combineDice(attribute.value, rollData.skill?.value, rollData.modifier?.value);
 
     this.rollData = {
       ...rollData,
       attributeName,
       attribute,
+      total,
+    };
+
+    this.render(true);
+  }
+
+  onRollModifierChanged(html) {
+    const modifierDice = parseInt(html.find('#modifier-form-dice').val()) || 0;
+    const modifierPips = parseInt(html.find('#modifier-form-pips').val()) || 0;
+    const modifier = { dice: modifierDice, pips: modifierPips };
+    const rollData = this.rollData;
+    const total = combineDice(rollData.attribute.value, rollData.skill?.value, modifier);
+
+    this.rollData = {
+      ...rollData,
+      modifier,
+      total,
     };
 
     this.render(true);

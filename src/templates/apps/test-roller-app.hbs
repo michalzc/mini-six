@@ -3,35 +3,56 @@
     <h1>{{ localize "MiniSix.Rolls.testOf" title=title }}</h1>
   </header>
   <section class="roll-app-body">
-    <label for="roll-difficulty">{{ localize "MiniSix.Labels.difficultLevel" }}</label>
+    <label for="roll-difficulty">{{ localize "MiniSix.Labels.difficultyLevel" }}</label>
     <select name="difficulty" id="roll-difficulty" class="colspan2">
       {{selectOptions difficultyLevels selected=difficultyKey localize=true labelAttr="label" }}
     </select>
 
     <label for="roll-difficulty-level"></label>
-    <input type="number" data-dtype="Number" id="roll-difficulty-level" name="difficultyLevel"
-           value="{{difficultyLevel}}" min="0" step="1" class="colspan2">
+    <div class="dice-form">
+      <input type="number" data-dtype="Number" id="roll-difficulty-level" name="difficultyLevel"
+             value="{{difficultyLevel}}" min="0" step="1" class="colspan2">
+    </div>
 
+    <div class="colspan3">
+      <hr>
+    </div>
 
     {{#if skill}}
       <label for="roll-attribute">{{ localize "MiniSix.Labels.attribute" }}</label>
+      <div>{{ formatDice attribute.value }}</div>
       <select id="roll-attribute">
         {{selectOptions attributes selected=attributeName labelAttr="label" }}
       </select>
-      <div>{{ formatDice attribute.value }}</div>
 
       <div>{{ localize "MiniSix.Labels.skill" }}</div>
-      <div>{{ skill.name }}</div>
       <div>{{ formatDice skill.value }}</div>
+      <div>{{ skill.name }}</div>
 
     {{else}}
       <div>{{ localize "MiniSix.Labels.attribute" }}</div>
-      <div>{{attribute.label}}</div>
       <div>{{ formatDice attribute.value }}</div>
+      <div>{{attribute.label}}</div>
     {{/if}}
 
+    <div>{{ localize "MiniSix.Rolls.modifier" }}</div>
+    <div class="dice-form">
+      <input type="number" data-dtype="Number" name="modifier.dice" value="{{modifier.dice}}" id="modifier-form-dice">
+      <label for="modifier-form-dice"><i class="fas fa-dice-d6"></i></label>
+      <label for="modifier-form-pips">+</label>
+      <input type="number" data-dtype="Number" name="modifier.pips" value="{{modifier.pips}}" id="modifier-form-pips">
+    </div>
+    <div></div>
 
+    <div class="colspan3">
+      <hr>
+    </div>
 
+    <div>{{ localize "MiniSix.Labels.total" }}</div>
+    <div>
+      {{ formatDice total }}
+    </div>
+    <div></div>
 
 
   </section>

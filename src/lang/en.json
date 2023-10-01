@@ -64,8 +64,9 @@
       "no": "No",
       "deleteConfirmationTitle": "Are you sure?",
       "rollDialogTitle": "Test Roll",
-      "difficultLevel": "Difficult Level",
-      "skill": "Skill"
+      "difficultyLevel": "Difficulty Level",
+      "skill": "Skill",
+      "total": "Total"
     },
     "Rolls": {
       "skillRoll": "Skill Roll: <strong>{skill} ({attribute})</strong>",
@@ -78,7 +79,8 @@
       "with": " with ",
       "test": "Test",
       "testOf": "Test of {title}",
-      "rollButton": "Roll"
+      "rollButton": "Roll",
+      "modifier": "Roll Modifier"
     },
     "Difficulty": {
       "plainRoll": "Plain Roll",
