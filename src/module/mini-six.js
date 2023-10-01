@@ -1,16 +1,6 @@
 import { registerSettings } from './settings.js';
 import { preloadTemplates } from './preloadTemplates.js';
 import { log } from './utils.js';
-import CharacterDataModel from './data-model/character-data-model.js';
-import {
-  ArmourDataModel,
-  GearDataModel,
-  PerkDataModel,
-  SkillDataModel,
-  SpellDataModel,
-  WeaponDataModel,
-} from './data-model/items-data-models.js';
-import { NpcDataModel } from './data-model/npc-data-model.js';
 import MinSixActor from './document/actor.js';
 import { SYSTEM, SYSTEM_ID } from './consts.js';
 import { MiniSixCharacterSheet } from './sheet/actor/character-sheet.js';
@@ -19,23 +9,7 @@ import { MiniSixVehicleSheet } from './sheet/actor/vehicle-sheet.js';
 import MiniSixItem from './document/item.js';
 import MiniSixItemSheet from './sheet/item/item-sheet.js';
 import { registerHandlebarsHelpers } from './handlebars-helpers.js';
-
-function registerDataModels() {
-  CONFIG.Actor.dataModels = {
-    ...CONFIG.Actor.dataModels,
-    character: CharacterDataModel,
-    npc: NpcDataModel,
-  };
-  CONFIG.Item.dataModels = {
-    ...CONFIG.Item.dataModels,
-    skill: SkillDataModel,
-    perk: PerkDataModel,
-    spell: SpellDataModel,
-    weapon: WeaponDataModel,
-    armour: ArmourDataModel,
-    gear: GearDataModel,
-  };
-}
+import { registerDataModels } from './data-model/data-models.js';
 
 function registerDocuments() {
   CONFIG.Actor.documentClass = MinSixActor;
