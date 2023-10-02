@@ -1,3 +1,10 @@
-<div>
-  Weapon Details
+<div class="item-details">
+  <label for="attribute">{{ localize "MiniSix.Labels.attribute" }}</label>
+  {{ log attributes }}
+  <select name="system.attribute" id="attribute">
+    {{selectOptions attributes selected=system.attributeRef localize=true}}
+  </select>
+
+  <label for="skill">{{ localize "MiniSix.Labels.skill" }}</label>
+  <input type="text" name="system.skillRef" value="{{system.skillRef}}" list="skill-list">
 </div>

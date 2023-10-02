@@ -1,0 +1,55 @@
+.mini-six.sheet {
+  .sheet-header {
+    padding-bottom: 0.5em;
+
+    .header-row {
+      display: flex;
+      flex-direction: row;
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+      gap: 0.5em;
+    }
+
+    .header-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr 2fr);
+      align-items: center;
+      padding-top: 0.2em;
+      gap: 0.2em;
+
+      label {
+        text-align: right;
+      }
+    }
+  }
+
+  .value-form {
+    align-items: center;
+    gap: 0.25em;
+
+    & > * {
+      flex: 0;
+    }
+
+    & > label {
+      text-align: center;
+    }
+
+    input[type='number'] {
+      text-align: center;
+      min-width: 2em;
+    }
+  }
+
+  .span2 {
+    grid-column-end: span 2;
+  }
+
+  .span3 {
+    grid-column-end: span 3;
+  }
+
+  .span4 {
+    grid-column-end: span 4;
+  }
+}

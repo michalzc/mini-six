@@ -1,0 +1,39 @@
+.mini-six.test-roller {
+  .roll-app-body {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 0.5em;
+    align-items: center;
+
+    .colspan2 {
+      grid-column-end: span 2;
+    }
+
+    .colspan3 {
+      grid-column-end: span 3;
+    }
+
+    hr {
+      border: 0;
+      border-bottom: 2px solid var(--color-underline-header);
+    }
+
+    .dice-form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.25em;
+
+      & > * {
+        flex: 0;
+      }
+
+      input[type='number'] {
+        max-width: 2em;
+        min-width: 2em;
+        text-align: center;
+      }
+    }
+  }
+}

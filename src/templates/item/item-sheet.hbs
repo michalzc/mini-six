@@ -5,21 +5,23 @@
     <h1><input type="text" name="name" value="{{item.name}}" placeholder="{{localize "MiniSix.Labels.name"}}"></h1>
   </header>
 
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="details">{{ localize "MiniSix.Tabs.details" }}</a>
-    <a class="item" data-tab="description">{{ localize "MiniSix.Tabs.description" }}</a>
-  </nav>
-
   <section class="sheet-body">
-    <div class="tab details" data-group="primary" data-tab="details">
+
+    <div class="details">
       {{> (lookup . 'sheetDetails') }}
     </div>
 
-    <div class="tab description" data-group="primary" data-tab="description">
+    <fieldset class="description">
+      <legend>Description</legend>
       <div>
         {{editor itemDescription target="system.description" button=true engine="tinymce" editable=true }}
       </div>
-    </div>
+    </fieldset>
   </section>
+  <datalist id="skill-list">
+    {{#each skillList}}
+      <option value="{{this}}"></option>
+    {{/each}}
+  </datalist>
 
 </form>
