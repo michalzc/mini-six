@@ -3,6 +3,25 @@ export const SYSTEM_NAME = 'Mini Six 🎲';
 
 const POTENCY_LEVEL = ['notAThreat', 'minor', 'credible', 'watchOut', 'bold'];
 
+const ITEM_STATUSES = {
+  stored: {
+    label: 'MiniSix.Items.Statuses.stored',
+  },
+  stowed: {
+    label: 'MiniSix.Items.Statuses.stowed',
+  },
+  carried: {
+    label: 'MiniSix.Items.Statuses.carried',
+  },
+};
+
+const WEAPON_STATUSES = {
+  ...ITEM_STATUSES,
+  readied: {
+    label: 'MiniSix.Items.Statuses.readied',
+  },
+};
+
 const ATTRIBUTES = {
   might: {
     label: 'MiniSix.Attributes.might',
@@ -64,4 +83,6 @@ export const SYSTEM = {
   POTENCY_LEVEL,
   ATTRIBUTES,
   DIFFICULTY_LEVELS,
+  ITEM_STATUSES,
+  WEAPON_STATUSES,
 };

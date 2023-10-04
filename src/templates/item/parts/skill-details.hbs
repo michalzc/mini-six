@@ -5,14 +5,7 @@
   </select>
 
   <label>{{ localize 'MiniSix.Labels.value' }}</label>
-  <div class="flexrow value-form">
-    <input id="dice" type="number" data-dtype="Number" name="system.value.dice" value="{{system.value.dice}}" min="0"
-           step="1">
-    <label for="dice"><i class="fa fa-dice-d6"></i></label>
-    <label for="pips">+</label>
-    <input id="pips" type="number" data-dtype="Number" name="system.value.pips" value="{{system.value.pips}}" min="0"
-           max="2" step="1">
-  </div>
+  {{ diceForm "system.value" system.value }}
 
   <label for="genre">{{ localize 'MiniSix.Labels.genre' }}</label>
   <input id="genre" name="system.genre" value="{{system.genre}}" type="text">

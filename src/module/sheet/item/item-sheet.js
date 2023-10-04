@@ -1,3 +1,4 @@
+import * as CONFIG from '../../consts.js';
 import { SYSTEM_ID } from '../../consts.js';
 import { log, logObject } from '../../utils.js';
 
@@ -25,11 +26,13 @@ export default class MiniSixItemSheet extends ItemSheet {
     const sheetDetails = `systems/mini-six/templates/item/parts/${this.item.type}-details.hbs`;
     const itemDescription = await TextEditor.enrichHTML(system.description);
     const attributes = MiniSixItemSheet.prepareAttributes();
+    const rangeField = system.range && system.range.join('/');
     const newData = {
       system,
       sheetDetails,
       itemDescription,
       attributes,
+      rangeField,
       skillList: this.skillList,
     };
     return logObject('Item Sheet Prepared object', foundry.utils.mergeObject(context, newData));
@@ -44,6 +47,13 @@ export default class MiniSixItemSheet extends ItemSheet {
     return `systems/${SYSTEM_ID}/templates/item/item-sheet.hbs`;
   }
 
+  async _updateObject(event, formData) {
+    const updateRange = (formData) =>
+      (formData.range && { ...formData, 'system.range': parseRange(formData.range) }) || formData;
+
+    return super._updateObject(event, logObject('Updated form data', updateRange(formData)));
+  }
+
   get skillList() {
     const onlyUnique = (value, index, array) => array.indexOf(value) === index;
 
@@ -53,4 +63,18 @@ export default class MiniSixItemSheet extends ItemSheet {
 
     return gameSkills.concat(parentSkills).filter(onlyUnique).sort();
   }
+}
+
+/**
+ *
+ * @param rangeValue
+ * @returns {*[number]}
+ */
+function parseRange(rangeValue) {
+  if (rangeValue) {
+    return rangeValue
+      .split('/')
+      .map((x) => parseInt(x))
+      .filter((e) => !isNaN(e));
+  } else return [];
 }

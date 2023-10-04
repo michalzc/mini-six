@@ -40,6 +40,7 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
       ranged: new fields.BooleanField(),
       skillRef: new fields.StringField({ trim: true }),
       attributeRef: new fields.StringField({ trim: true }),
+      range: new fields.ArrayField(new fields.NumberField({ min: 0, integer: true }), { initial: [0, 0, 0] }),
       damage: diceValue(),
     };
   }
@@ -52,6 +53,7 @@ export class ArmourDataModel extends foundry.abstract.DataModel {
       characteristics: gearCharacteristicsSchema(),
       soak: diceValue(),
       isShield: new fields.BooleanField({ initial: false }),
+      status: new fields.StringField({ choices: SYSTEM.WEAPON_STATUSES, initial: 'stowed' }),
     };
   }
 }
@@ -61,6 +63,7 @@ export class GearDataModel extends foundry.abstract.DataModel {
     return {
       description: new fields.HTMLField(),
       characteristics: gearCharacteristicsSchema(),
+      status: new fields.StringField({ choices: SYSTEM.ITEM_STATUSES, initial: 'stowed' }),
     };
   }
 }
