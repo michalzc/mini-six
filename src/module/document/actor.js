@@ -32,15 +32,29 @@ export default class MinSixActor extends Actor {
   prepareCharacterData() {
     log('Preparing character data');
     this.prepareAttributes();
+    this.prepareItems();
   }
 
   prepareNpcData() {
     log('Preparing npc data');
     this.prepareAttributes();
+    this.prepareItems();
   }
 
   prepareVehicleData() {
     log('Preparing vehicle data');
+  }
+
+  prepareItems() {
+    const weapons = this.items.filter((item) => item.type === 'weapon');
+    const armour = this.items.filter((item) => item.type === 'armour');
+    const gear = this.items.filter((item) => item.type === 'gear');
+    const spells = this.items.filter((item) => item.type === 'spell');
+
+    this.weapons = weapons;
+    this.armour = armour;
+    this.gear = gear;
+    this.spells = spells;
   }
 
   prepareAttributes() {

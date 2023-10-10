@@ -6,6 +6,8 @@ export async function preloadTemplates() {
     `systems/${SYSTEM_ID}/templates/actor/parts/attributes.hbs`,
     `systems/${SYSTEM_ID}/templates/item/parts/skill-details.hbs`,
     `systems/${SYSTEM_ID}/templates/item/parts/weapon-details.hbs`,
+    `systems/${SYSTEM_ID}/templates/actor/parts/gear.hbs`,
+    `systems/${SYSTEM_ID}/templates/actor/parts/gear-list.hbs`,
   ];
 
   return loadTemplates(templatePaths);

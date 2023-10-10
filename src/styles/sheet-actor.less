@@ -53,4 +53,44 @@
       }
     }
   }
+
+  .gear {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+
+    .gear-list {
+      flex-grow: 2;
+
+      .gear-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.25em;
+
+        img {
+          flex-grow: 0;
+          max-width: 1em;
+          max-height: 1em;
+          border: 0;
+        }
+
+        .gear-item {
+          flex-grow: 1;
+        }
+
+        .gear-edit {
+          flex-grow: 0;
+        }
+
+        .gear-delete {
+          flex-grow: 0;
+        }
+      }
+    }
+
+    .gear-info {
+      flex-grow: 1;
+    }
+  }
 }

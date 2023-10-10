@@ -11,7 +11,7 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
         {
           navSelector: '.sheet-tabs',
           contentSelector: '.sheet-body',
-          initial: 'attributes',
+          initial: 'gear', //FIXME: update to attributes
         },
       ],
     });
@@ -26,6 +26,10 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
 
     html.find('.skill-roll').click(this.onTestRoll.bind(this));
     html.find('.attribute-roll').click(this.onTestRoll.bind(this));
+    // eslint-disable-next-line no-undef
+    html.find('.gear-edit').on('click', (event) => this.onItemEdit($(event.currentTarget)));
+    // eslint-disable-next-line no-undef
+    html.find('.gear-delete').on('click', (event) => this.onItemDelete($(event.currentTarget)));
   }
 
   async onTestRoll(event) {
@@ -67,6 +71,7 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
   }
 
   onItemDelete(elem) {
+    log('Delete element', elem);
     const id = elem.data()['itemId'];
     if (id) {
       const confirmation = new Dialog({

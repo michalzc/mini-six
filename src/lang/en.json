@@ -70,7 +70,11 @@
       "ranged": "Ranged Weapon",
       "range": "Range",
       "damage": "Damage",
-      "flatModifier": "Flat Modifier"
+      "flatModifier": "Flat Modifier",
+      "weapons": "Weapons",
+      "armour": "Armour",
+      "gear": "Gear",
+      "gearInfo": "Info"
     },
     "Rolls": {
       "skillRoll": "Skill Roll: <strong>{skill} ({attribute})</strong>",

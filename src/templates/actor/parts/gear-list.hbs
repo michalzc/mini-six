@@ -1,0 +1,8 @@
+{{#each this as |element|}}
+  <div class="gear-row">
+    <img src="{{element.img}}" title="{{element.name}}" alt="{{element.name}}">
+    <a class="gear-item" data-item-id="{{element._id}}">{{element.name}}</a>
+    <a class="gear-edit" data-item-id="{{element._id}}"><i class="fas fa-edit"></i></a>
+    <a class="gear-delete" data-item-id="{{element.id}}"><i class="fas fa-trash"></i></a>
+  </div>
+{{/each}}
