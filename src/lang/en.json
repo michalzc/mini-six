@@ -69,7 +69,8 @@
       "total": "Total",
       "ranged": "Ranged Weapon",
       "range": "Range",
-      "damage": "Damage"
+      "damage": "Damage",
+      "flatModifier": "Flat Modifier"
     },
     "Rolls": {
       "skillRoll": "Skill Roll: <strong>{skill} ({attribute})</strong>",

@@ -70,6 +70,7 @@ export default class TestRollerApp extends Application {
     html.find('#roll-attribute').on('change', this.onRollAttributeChange.bind(this));
     html.find('#modifier-form-dice').on('change', this.onRollModifierChanged.bind(this, html));
     html.find('#modifier-form-pips').on('change', this.onRollModifierChanged.bind(this, html));
+    html.find('#modifier-form-flat').on('change', this.onRollModifierChanged.bind(this, html));
   }
 
   async onRoll(event) {
@@ -138,7 +139,8 @@ export default class TestRollerApp extends Application {
   onRollModifierChanged(html) {
     const modifierDice = parseInt(html.find('#modifier-form-dice').val()) || 0;
     const modifierPips = parseInt(html.find('#modifier-form-pips').val()) || 0;
-    const modifier = { dice: modifierDice, pips: modifierPips };
+    const modifierFlat = parseInt(html.find('#modifier-form-flat').val()) || 0;
+    const modifier = { dice: modifierDice, pips: modifierPips, flat: modifierFlat };
     const rollData = this.rollData;
     const total = normalizeDice(combineDice(rollData.attribute.value, rollData.skill?.value, modifier));
 

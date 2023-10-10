@@ -54,12 +54,13 @@ export async function testRoll(actor, attributeName, skillId = undefined, skipDi
  * @returns {string}
  */
 function makeRollString(diceValue) {
-  const { dice, pips } = diceValue;
+  const { dice, pips, flat } = diceValue;
+  const mod = (pips ?? 0) + (flat ?? 0);
   return [
     (dice > 1 && [`${dice - 1}d6`]) || [],
     (dice > 0 && ['d6x6']) || [],
-    (pips > 0 && [`${pips}`]) || [],
-    (dice === 0 && pips === 0 && '0') || [],
+    (mod !== 0 && [`${mod}`]) || [],
+    (dice === 0 && mod === 0 && '0') || [],
   ]
     .deepFlatten()
     .join(' + ');
@@ -175,7 +176,9 @@ function makeFlavour(skill, attribute, target) {
   const rollTitle =
     (skill && game.i18n.format('MiniSix.Rolls.skillRoll', { skill: skill.name, attribute: attribute.label })) ||
     game.i18n.format('MiniSix.Rolls.attributeRoll', { attribute: attribute.label });
-  const targetTitle = (target && ` vs <strong>${game.i18n.localize(target.label)}(${target.value})</strong>`) || '';
+  log('Target', target);
+  const targetTitle =
+    (target?.value && ` vs <strong>${game.i18n.localize(target.label)}(${target.value})</strong>`) || '';
   return rollTitle + targetTitle;
 }
 

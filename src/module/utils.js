@@ -15,6 +15,7 @@ export const identity = (id) => id;
  * @typedef {object} DiceValue
  * @property {number} [dice]  Number of dice in roll
  * @property {number} [pips]  Number of pips in roll
+ * @property {number} [flat]  The flat modifier, not converted to dice
  */
 
 /**
@@ -26,8 +27,9 @@ export const identity = (id) => id;
 export function normalizeDice(diceValue, roundToZero = true) {
   const dice = diceValue.dice ?? 0;
   const pips = diceValue.pips ?? 0;
+  const flat = diceValue.flat ?? 0;
   const extraDice = Math.floor(pips / 3);
-  const remainingPips = pips % 3;
+  const remainingPips = (pips % 3) + flat;
   let newDice = dice + extraDice;
   return {
     dice: (roundToZero && Math.max(newDice, 0)) || dice,
@@ -43,8 +45,9 @@ export function normalizeDice(diceValue, roundToZero = true) {
 export function formatDice(diceValue) {
   const dice = (dv) => (dv?.dice && [`${dv.dice}&nbsp;<i class="fas fa-dice-d6"></i>`]) || [];
   const pips = (dv) => (dv?.pips && [dv.pips.toString()]) || [];
+  const flat = (dv) => (dv?.flat && [dv.flat.toString()]) || [];
 
-  return [dice(diceValue), pips(diceValue)].deepFlatten().join(' + ');
+  return [dice(diceValue), pips(diceValue), flat(diceValue)].deepFlatten().join(' + ');
 }
 
 /**
@@ -57,9 +60,10 @@ export function combineDice(...args) {
     (acc, diceValue) => {
       const newDice = diceValue?.dice ?? 0;
       const newPips = diceValue?.pips ?? 0;
+      const newFlat = diceValue?.flat ?? 0;
 
-      return { dice: newDice + acc.dice, pips: newPips + acc.pips };
+      return { dice: newDice + acc.dice, pips: newPips + acc.pips, flat: newFlat + acc.flat };
     },
-    { dice: 0, pips: 0 },
+    { dice: 0, pips: 0, flat: 0 },
   );
 }
