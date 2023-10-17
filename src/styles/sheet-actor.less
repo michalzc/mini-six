@@ -1,4 +1,27 @@
 .mini-six.sheet.actor {
+  .sheet-header {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5em;
+
+    label {
+      text-align: right;
+    }
+
+    .short {
+      width: 3em;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 64px;
+      height: 64px;
+      border: 0;
+      align-self: center;
+      justify-self: center;
+    }
+  }
+
   .attributes-with-skills {
     display: grid;
     gap: 1em;

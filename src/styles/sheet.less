@@ -2,24 +2,10 @@
   .sheet-header {
     padding-bottom: 0.5em;
 
-    .header-row {
-      display: flex;
-      flex-direction: row;
-      padding-top: 0.2em;
-      padding-bottom: 0.2em;
-      gap: 0.5em;
-    }
-
-    .header-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr 2fr);
-      align-items: center;
-      padding-top: 0.2em;
-      gap: 0.2em;
-
-      label {
-        text-align: right;
-      }
+    .input-name {
+      grid-column-end: span 7;
+      font-size: 2em;
+      height: 48px;
     }
   }
 
@@ -53,5 +39,9 @@
 
   .span4 {
     grid-column-end: span 4;
+  }
+
+  .span7 {
+    grid-column-end: span 7;
   }
 }
