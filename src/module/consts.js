@@ -3,23 +3,38 @@ export const SYSTEM_NAME = 'Mini Six 🎲';
 
 const POTENCY_LEVEL = ['notAThreat', 'minor', 'credible', 'watchOut', 'bold'];
 
-const ITEM_STATUSES = {
+const ALL_STATUSES = {
   stored: {
-    label: 'MiniSix.Items.Statuses.stored',
-  },
-  stowed: {
-    label: 'MiniSix.Items.Statuses.stowed',
+    label: 'MiniSix.Items.ItemStatuses.stored',
+    icon: '<i class="fas fa-archive"></i>',
   },
   carried: {
-    label: 'MiniSix.Items.Statuses.carried',
+    label: 'MiniSix.Items.ItemStatuses.carried',
+    icon: '<i class="fas fa-suitcase"></i>',
+  },
+  readied: {
+    label: 'MiniSix.Items.ItemStatuses.readied',
+    icon: '<i class="fas fa-hand-paper"></i>',
+  },
+  worn: {
+    label: 'MiniSix.Items.ItemStatuses.worn',
+    icon: '<i class="fas fa-t-shirt"></i>',
   },
 };
 
+const GEAR_STATUSES = {
+  stored: ALL_STATUSES.stored,
+  carried: ALL_STATUSES.carried,
+};
+
 const WEAPON_STATUSES = {
-  ...ITEM_STATUSES,
-  readied: {
-    label: 'MiniSix.Items.Statuses.readied',
-  },
+  ...GEAR_STATUSES,
+  readied: ALL_STATUSES.readied,
+};
+
+const ARMOUR_STATUSES = {
+  ...GEAR_STATUSES,
+  worn: ALL_STATUSES.worn,
 };
 
 const ATTRIBUTES = {
@@ -83,6 +98,8 @@ export const SYSTEM = {
   POTENCY_LEVEL,
   ATTRIBUTES,
   DIFFICULTY_LEVELS,
-  ITEM_STATUSES,
+  ALL_STATUSES,
+  GEAR_STATUSES,
   WEAPON_STATUSES,
+  ARMOUR_STATUSES,
 };

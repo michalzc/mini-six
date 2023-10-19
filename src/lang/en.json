@@ -102,9 +102,9 @@
     "Items": {
       "ItemStatuses": {
         "stored": "Stored",
-        "stowed": "Stowed",
         "carried": "Carried",
-        "readied": "readied"
+        "readied": "Readied",
+        "worn": "Worn"
       }
     }
   }

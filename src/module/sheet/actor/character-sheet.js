@@ -17,12 +17,25 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
     });
   }
 
+  getData(options = {}) {
+    const context = super.getData(options);
+    const system = this.actor.system;
+    log('Character Data', context);
+    const attributesWithSkills = Object.keys(CONFIG.SYSTEM.ATTRIBUTES).map(
+      (attr) => this.actor.attributesWithSkills[attr],
+    );
+
+    return logObject('Sheet context', foundry.utils.mergeObject(context, { system, attributesWithSkills }));
+  }
+
   activateListeners(html) {
     super.activateListeners(html);
 
     if (!this.isEditable) return;
 
     this.skillContextMenu(html);
+    this.weaponStatusMenu(html);
+    this.armourStatusMenu(html);
 
     html.find('.skill-roll').click(this.onTestRoll.bind(this));
     html.find('.attribute-roll').click(this.onTestRoll.bind(this));
@@ -44,6 +57,30 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
     await testRoll(this.actor, attributeName, skillId, skipDialog);
   }
 
+  weaponStatusMenu(html) {
+    const elems = Object.entries(CONFIG.SYSTEM.WEAPON_STATUSES).map(([name, elem]) => {
+      return {
+        name: game.i18n.localize(elem.label),
+        icon: elem.icon,
+        callback: this.onItemUpdateStatus.bind(this, name),
+      };
+    });
+
+    new ContextMenu(html, '.item-status-weapon', elems, { eventName: 'click' });
+  }
+
+  armourStatusMenu(html) {
+    const elems = Object.entries(CONFIG.SYSTEM.ARMOUR_STATUSES).map(([name, elem]) => {
+      return {
+        name: game.i18n.localize(elem.label),
+        icon: elem.icon,
+        callback: this.onItemUpdateStatus.bind(this, name),
+      };
+    });
+
+    new ContextMenu(html, '.item-status-armour', elems, { eventName: 'click' });
+  }
+
   skillContextMenu(html) {
     const elems = [
       {
@@ -61,6 +98,17 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
     new ContextMenu(html, '.skill-roll', elems);
   }
 
+  async onItemUpdateStatus(status, elem) {
+    log('Status change', status, elem.data());
+    const itemIt = elem.data().itemId;
+    const item = itemIt && this.actor.items.get(itemIt);
+    if (item) {
+      let newData = { system: { status: status } };
+      await item.update(newData);
+      this.render(true);
+    }
+  }
+
   onItemEdit(elem) {
     log('Edit item', elem.data());
     const id = elem.data()['itemId'];
@@ -73,40 +121,7 @@ export class MiniSixCharacterSheet extends MiniSixBaseActorSheet {
   onItemDelete(elem) {
     log('Delete element', elem);
     const id = elem.data()['itemId'];
-    if (id) {
-      const confirmation = new Dialog({
-        title: game.i18n.localize('MiniSix.Labels.deleteConfirmationTitle'),
-        content: game.i18n.localize('MiniSix.Labels.deleteConfirmation'),
-        buttons: {
-          yes: {
-            icon: '<i class="fas fa-check"></i>',
-            label: game.i18n.localize('MiniSix.Labels.yes'),
-            callback: this.deleteItem.bind(this, id),
-          },
-          no: {
-            icon: '<i class="fas fa-ban"></i>',
-            label: game.i18n.localize('MiniSix.Labels.no'),
-          },
-        },
-        default: 'no',
-      });
-      confirmation.render(true);
-    }
-  }
-
-  deleteItem(itemId) {
-    const item = this.actor.items.get(itemId);
-    if (item) item.delete();
-  }
-
-  getData(options = {}) {
-    const context = super.getData(options);
-    const system = this.actor.system;
-    log('Character Data', context);
-    const attributesWithSkills = Object.keys(CONFIG.SYSTEM.ATTRIBUTES).map(
-      (attr) => this.actor.attributesWithSkills[attr],
-    );
-
-    return logObject('Sheet context', foundry.utils.mergeObject(context, { system, attributesWithSkills }));
+    const item = id && this.actor.items.get(id);
+    if (item) item.deleteDialog();
   }
 }

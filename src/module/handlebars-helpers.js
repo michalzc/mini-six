@@ -15,4 +15,9 @@ export function registerHandlebarsHelpers() {
  </div>`;
     return new Handlebars.SafeString(form);
   });
+
+  Handlebars.registerHelper('itemStatus', function (status) {
+    const icon = CONFIG.SYSTEM.ALL_STATUSES[status]?.icon ?? '';
+    return new Handlebars.SafeString(icon);
+  });
 }
